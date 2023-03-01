@@ -1,24 +1,25 @@
-import useAuth from '@/hooks/useAuth'
+import useAuthContext from '@/contexts/AuthContext'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Register() {
-  const { register } = useAuth()
+  const { register, error } = useAuthContext()
 
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState<string>('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await register({ name, email, password, confirmPassword })
+    await register({ name, email, password, passwordConfirmation })
   }
 
   return (
     <div className='w-full min-h-screen flex flex-col justify-center items-center'>
       <div className='border p-8 flex flex-col shadow rounded-md space-y-2 w-1/3 border-slate-200'>
         <h1 className='text-2xl font-bold text-slate-900 pb-5'>Register</h1>
+        {error && <span className='text-red-600 italic font-semibold'>{error}</span>}
         <form className='flex flex-col space-y-3' onSubmit={handleSubmit}>
           <div className='flex flex-col space-y-0.5'>
             <label htmlFor='name' className='text-sm font-medium text-slate-900'>Name</label>
@@ -63,8 +64,8 @@ export default function Register() {
               name='confirmPassword'
               id='confirmPassword'
               placeholder='********'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
               className='rounded-md p-2 border transition-all duration-300 outline-none placeholder:text-sm placeholder:italic focus:outline-none placeholder-slate-400 border-slate-200 focus:border-slate-500'
             />
           </div>
