@@ -1,11 +1,15 @@
 import { Home, Login, Register } from '@/pages'
 import { Link, Route, Routes } from 'react-router-dom'
+import logo from '@/assets/logo.svg'
 
 export default function App() {
   return (
     <>
       <header className='h-16 w-full shadow flex flex-row justify-between items-center px-8 fixed bg-white'>
-        <h1 className='select-none font-extrabold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#F34E39] to-[#00D8FF]'>Lara React</h1>
+        <Link to='/' className='flex flex-row items-center space-x-1'>
+          <img src={logo} alt='Lara React' className='h-8' />
+          <h1 className='select-none font-semibold text-2xl text-react-blue-500'>Lara React</h1>
+        </Link>
         <nav className='flex flex-row justify-between items-center space-x-5'>
           <Link to='/' className='text-slate-900 hover:text-slate-700 transition-all duration-300 font-medium'>Home</Link>
           <Link to='/register' className='text-slate-900 hover:text-slate-700 transition-all duration-300 font-medium'>Register</Link>
